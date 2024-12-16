@@ -21,13 +21,25 @@ def analyze_sentence_fluency(text):
     
     return sentence_lengths, avg_length, std_dev_length
 
-def plot_sentence_fluency(sentence_lengths):
+def plot_sentence_fluency(sentence_lengths, avg_length):
     # Create a line plot for sentence lengths
-    plt.plot(sentence_lengths, marker='o', linestyle='-', color='b')
+    plt.plot(sentence_lengths, marker='o', linestyle='-', color='b', label='Sentence Lengths')
+    
+    # Add a horizontal line at the average sentence length
+    plt.axhline(y=avg_length, color='r', linestyle='--', label=f'Average Length ({avg_length:.2f} words)')
+    
+    # Title and labels
     plt.title('Sentence Lengths')
     plt.xlabel('Sentence Number')
     plt.ylabel('Number of Words')
+    
+    # Display legend
+    plt.legend()
+    
+    # Add grid for better visualization
     plt.grid(True)
+    
+    # Show the plot
     plt.show()
 
 def fluency_rating(avg_length, std_dev_length):
@@ -72,4 +84,4 @@ if text:
     print(f"Standard Deviation of Sentence Lengths: {std_dev_length:.2f} words")
     print(f"Sentence Fluency Rating: {rating}")
     
-    plot_sentence_fluency(sentence_lengths)
+    plot_sentence_fluency(sentence_lengths, avg_length)
